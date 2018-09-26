@@ -12,3 +12,22 @@ class Rectangle:
 r1=Rectangle(5,6)
 print(r1)
 print(r1.area())
+
+
+class sumtozero:
+    def __init__(self,array):
+        self.list = array
+        self.l=len(array)
+
+    def zero(self):
+        ans=[]
+        for i in range(self.l):
+            for j in range(i+1,self.l):
+                for k in range(j+1,self.l):
+                    if self.list[i]+self.list[j]+self.list[k]==0:
+                        ans.append([self.list[i],self.list[j],self.list[k]])
+        return ans
+     
+     
+a = sumtozero([-25,-10,-7,-3,2,4,8,10])
+print(a.zero())
