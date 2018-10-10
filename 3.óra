@@ -1,0 +1,60 @@
+class Vector:
+    ox=0
+    oy=0
+
+    def __init__(self,p1,p2):
+        self.x=p1
+        self.y=p2
+
+    def __str__(self):
+        return '<{},{}>'.format(self.x,self.y)
+
+    def __abs__(self):
+        return (self.x**2+self.y**2)**0.5
+
+    def __add__(self, other):
+        if isinstance(other,Vector):
+            x=self.x + other.x
+            y=self.y + other.y
+        if isinstance(other,int) or isinstance(other,float):
+            x=self.x + other
+            y=self.y + other
+        return self.__class__(x,y)
+
+    def __radd__(self, other):
+        return self.__add__(other)
+
+    def __sub__(self, other):
+        if isinstance(other,Vector):
+            x=self.x-other.x
+            y=self.y-other.y
+        if isinstance(other,int) or isinstance(other,float):
+            x=self.x-other
+            y=self.y-other
+        return self.__class__(x,y)
+
+    def __rsub__(self, other):
+        return self.__sub__(other)
+
+    def __mul__(self, other):
+        if isinstance(other,Vector):
+            return self.x * other.x + self.y * other.y
+        if isinstance(other,int) or isinstance(other,float):
+            x=self.x*other
+            y=self.y*other
+            return self.__class__(x,y)
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __eq__(self, other):
+        return self.__abs__()==other.__abs__()
+
+    def __lt__(self, other):
+        return self.__abs__()< other.__abs__()
+
+    def __ge__(self, other):
+        return self.__abs__()>= other.__abs__()
+
+    def __ne__(self, other):
+        return self.__abs__()!=other.__abs__()
