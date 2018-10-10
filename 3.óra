@@ -58,3 +58,68 @@ class Vector:
 
     def __ne__(self, other):
         return self.__abs__()!=other.__abs__()
+        
+        
+class Complex:
+
+    def __init__(self,p1,p2):
+        self.real=p1
+        self.img=p2
+
+    def __str__(self):
+        return '({}+{}j)'.format(self.real,self.img)
+
+    def conjugate(self):
+        return self.__class__(self.real,-self.img)
+
+    def argz(self):
+        return math.atan(self.img/self.real)
+
+    def __abs__(self):
+        return (self.real**2+self.img**2)**0.5
+
+    def __add__(self, other):
+        if isinstance(other,Complex):
+            real=self.real+other.real
+            img=self.img+other.img
+        if isinstance(other,int) or isinstance(other,float):
+            real=self.real+other
+            img=self.img
+        return self.__class__(real,img)
+
+    def __radd__(self, other):
+        return self.__radd__(other)
+
+    def __sub__(self, other):
+        if isinstance(other, float) or isinstance(other, int):
+            real = self.real - other
+            img = self.img
+        if isinstance(other, Complex):
+            real= self.real - other.real
+            img = self.img - other.img
+        return self.__class__(real,img)
+
+    def __rsub__(self, other):
+        if isinstance(other, float) or isinstance(other, int):
+            real = other - self.real
+            img = -self.img
+        return self.__class__(real, img)
+
+    def __mul__(self, other):
+        if isinstance(other, int) or isinstance(other, float):
+            real = self.real * other
+            img= self.img * other
+        if isinstance(other, Complex):
+            real= (self.real * other.real) - (self.img * other.imag)
+            img = (self.real * other.img) + (self.img * other.real)
+        return self.__class__(real, img)
+
+    def __rmul__(self, other):
+        return self.__mul__(other)
+
+    def __eq__(self, other):
+        return (self.real == other.real) and (self.img == other.imag)
+
+    def __ne__(self, other):
+        return (self.real != other.real) or (self.img != other.imag)        
+  
