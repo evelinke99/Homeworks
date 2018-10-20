@@ -121,5 +121,49 @@ class Complex:
         return (self.real == other.real) and (self.img == other.imag)
 
     def __ne__(self, other):
-        return (self.real != other.real) or (self.img != other.imag)        
+        return (self.real != other.real) or (self.img != other.imag)  
+        
+class Rational:
+    def __init__(self,sz,n=1):
+        self.nevezo=n
+        self.szamlalo=sz
+
+    def __str__(self):
+        return '{}/{}'.format(self.szamlalo,self.nevezo)
+
+
+    def lnko(self):
+        if self.szamlalo > self.nevezo:
+            self.szamlalo, self.nevezo = self.nevezo, self.szamlalo
+        s = 1
+        for i in range(self.szamlalo, self.nevezo+1):
+            if i==0:
+                continue
+            if self.szamlalo % i == 0 and self.nevezo % i == 0:
+                s = i
+        return s
+
+
+    def __add__(self, other):
+        if self.nevezo==other.nevezo:
+            a=self.szamlalo + other.szamlalo
+            return Rational(a,self.nevezo)
+        else:
+            szaml=(self.szamlalo*other.nevezo+other.szamlalo*self.nevezo)
+            nev=self.nevezo*other.nevezo
+            r=Rational(szaml,nev)
+            oszto=r.lnko()
+            return Rational(int(szaml/oszto),int(nev/oszto))
+
+
+    def __sub__(self, other):
+        if self.nevezo==other.nevezo:
+            a=self.szamlalo - other.szamlalo
+            return Rational(a,other.nevezo)
+        else:
+            szaml=(self.szamlalo*other.nevezo-other.szamlalo*self.nevezo)
+            nev=self.nevezo*other.nevezo
+            r=Rational(szaml,nev)
+            oszto=r.lnko()
+            return Rational(int(szaml/oszto),int(nev/oszto))    
   
