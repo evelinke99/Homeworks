@@ -1,0 +1,42 @@
+class Workers:
+    def __init__(self,name,id,address,phone,email):
+        self.__name=name
+        self.__id=id
+        self.__address=address
+        self.__phone=phone
+        self.__email=email
+
+    def getName(self):
+        return self.__name
+    def getId(self):
+        return self.__id
+    def getAdress(self):
+        return self.__address
+    def getPhone(self):
+        return self.__phone
+    def getEmail(self):
+        return self.__email
+
+    def setName(self,name):
+        self.__name=name
+    def setAdress(self,adress):
+        self.__address=adress
+    def setPhone(self,phone):
+        self.__phone=phone
+    def setEmail(self,email):
+        self.__email=email
+
+    def __str__(self):
+        return self.__name + "(ID: "+ self.__id+ ")"
+
+    def __eq__(self, other):
+        return self.getId()==other.getId()
+
+    def __le__(self, other):
+        if self.getName()==other.getName():
+            return self.getId()< other.getId()
+        else:
+            return self.getName()<other.getName()
+
+    def __gt__(self, other):
+        return self.getName() > other.getName()
